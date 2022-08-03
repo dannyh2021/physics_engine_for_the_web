@@ -24,7 +24,7 @@ point_light.position.set(10, 10, 50);
 
 const ambient_light = new THREE.AmbientLight(light_color, 0.2);
 
-export default class Playground3 extends React.Component {
+export default class Demo2 extends React.Component {
     private canvasRef: any;
 
     private w: World;
@@ -58,6 +58,16 @@ export default class Playground3 extends React.Component {
 
         this.initialize();
         this.onVisualize();
+    }
+
+    componentWillUnmount() {
+        if(this.renderer) {
+            this.renderer = null;
+        }
+
+        if (this.animationRequestID) {
+            cancelAnimationFrame(this.animationRequestID);
+        }
     }
 
     initialize(): void {
@@ -244,7 +254,8 @@ export default class Playground3 extends React.Component {
     render() {
         return (
             <div className="playground">
-                <h2>Playground 3 page desu...</h2>
+                <h2>Demo 2</h2>
+                <p>This scene shows how the physics engine detects and resolves collisions between spheres, boxes, and planes. At each time step, the engine first checks for all bounding box intersections using a sort and sweep algorithm. Then, the engine checks each bounding box intersection for collisions using the separating axis technique. If a collision is detected, contact data is generated that includes the information needed to resolve the collision. Finally, all colliding collisions are resolved by calculating and applying an impulse.</p>
                 <button onClick={this.onRestart}>Restart</button>
                 <button onClick={this.onResume}>Resume</button>
                 <button onClick={this.onPause}>Pause</button>

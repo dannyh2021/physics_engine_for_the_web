@@ -22,7 +22,7 @@ point_light.position.set(50, 50, 50);
 
 const ambient_light = new THREE.AmbientLight(light_color, 0.2);
 
-export default class Playground extends React.Component {
+export default class Demo1 extends React.Component {
     private canvasRef: any;
 
     private w: World;
@@ -56,6 +56,16 @@ export default class Playground extends React.Component {
 
         this.initialize();
         this.onVisualize();
+    }
+
+    componentWillUnmount() {
+        if(this.renderer) {
+            this.renderer = null;
+        }
+
+        if (this.animationRequestID) {
+            cancelAnimationFrame(this.animationRequestID);
+        }
     }
 
     initialize(): void {
@@ -206,7 +216,8 @@ export default class Playground extends React.Component {
     render() {
         return (
             <div className="playground">
-                <h2>Playground page desu...</h2>
+                <h2>Demo 1</h2>
+                <p>This scene shows how the physics engine is able to simulate unconstrained motion. At each time step, a gravitational force is applied to each object. Then, each object's position and orientiation is updated based on its velocity and angular momentum.</p>
                 <button onClick={this.onRestart}>Restart</button>
                 <button onClick={this.onResume}>Resume</button>
                 <button onClick={this.onPause}>Pause</button>

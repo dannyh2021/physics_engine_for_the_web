@@ -11,6 +11,37 @@
   box-sizing: border-box;
 }
 
+button {
+  color: #00dcf9;
+  padding: 8px;
+  margin: 10px 10px;
+  font-size: medium;
+  font-weight: bold;
+  border: 2px solid #00dcf9;
+  border-radius: 10px;
+  background-color: #007d8e;
+  cursor: pointer;
+}
+
+.site-title h1 {
+  /*color: #00bcd6;*/
+  margin: 10px;
+  font-size: 48px;
+  background: linear-gradient(-45deg, #b20000, #007d8e, #f66, #66ecff, #8e0000, #009db2);
+  background-size: 200% 500%;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: test_hover 5s ease-in-out infinite;
+  -moz-animation: test_hover 5s ease-in-out infinite;
+  -webkit-animation: test_hover 5s ease-in-out infinite;
+}
+
+@keyframes test_hover {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
 .horizontal-container {
   display: flex;
   direction: right;

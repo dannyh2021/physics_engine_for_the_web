@@ -23,7 +23,7 @@ point_light.position.set(10, 10, 50);
 
 const ambient_light = new THREE.AmbientLight(light_color, 0.2);
 
-export default class Playground2 extends React.Component {
+export default class Demo3 extends React.Component {
     private canvasRef: any;
 
     private w: World;
@@ -57,6 +57,16 @@ export default class Playground2 extends React.Component {
 
         this.initialize();
         this.onVisualize();
+    }
+
+    componentWillUnmount() {
+        if(this.renderer) {
+            this.renderer = null;
+        }
+
+        if (this.animationRequestID) {
+            cancelAnimationFrame(this.animationRequestID);
+        }
     }
 
     initialize(): void {
@@ -183,8 +193,9 @@ export default class Playground2 extends React.Component {
 
     render() {
         return (
-            <div className="playground2">
-                <h2>Playground page desu...</h2>
+            <div className="demo2">
+                <h2>Demo 3</h2>
+                <p>This scene shows how the physics engine simulates constrained dynamics. The sphere, set with some initial velocity, is launched into a small pile of cubes, and all objects are accelerated by the force of gravity. The engine may be extended to become part of physics-based game, such as one involved ballistics.</p>
                 <button onClick={this.onRestart}>Restart</button>
                 <button onClick={this.onResume}>Resume</button>
                 <button onClick={this.onPause}>Pause</button>

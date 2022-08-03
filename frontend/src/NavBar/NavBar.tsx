@@ -16,15 +16,10 @@ export default class NavBar extends React.Component {
     render() {
         return (
             <div className={s.navbar}>
-                <NavigationLink name="Home" url="/home"></NavigationLink>
-                <NavigationLink name="Playground" url="/playground"></NavigationLink>
-                <NavigationLink name="Playground 2" url="/playground2"></NavigationLink>
-                <NavigationLink name="Playground 3" url="/playground3"></NavigationLink>
-                <NavigationLink name="Playground 4" url="/playground4"></NavigationLink>
-                <NavigationLink name="Playground 5" url="/playground5"></NavigationLink>
-                <NavigationLink name="Playground 6" url="/playground6"></NavigationLink>
-                <NavigationLink name="Playground 7" url="/playground7"></NavigationLink>
-                <NavigationLink name="Playground 8" url="/playground8"></NavigationLink>
+                <NavigationLink name="About" url="/about"></NavigationLink>
+                <NavigationLink name="Demo 1" url="/demo1"></NavigationLink>
+                <NavigationLink name="Demo 2" url="/demo2"></NavigationLink>
+                <NavigationLink name="Demo 3" url="/demo3"></NavigationLink>
             </div>
         )
     }
