@@ -1,0 +1,21 @@
+.App {
+  background-color: #535255;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  padding-top: 1em;
+  padding-left: 3em;
+  position: absolute;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.horizontal-container {
+  display: flex;
+  direction: right;
+}
+
+#main_page {
+  margin-left: 3em;
+}
