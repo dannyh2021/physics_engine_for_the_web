@@ -1,9 +1,7 @@
 import React from "react";
-import { World } from "../physics_engine/physics_engine";
+import { World, Sphere, Box } from "../physics_engine/physics_engine";
 import * as THREE from "three";
-import { Box3, Vector3 } from "three";
-import { Sphere } from "../physics_engine/Sphere";
-import { Box } from "../physics_engine/Box";
+import { Vector3 } from "three";
 import { OrbitControls } from "three-orbitcontrols-ts";
 
 const CANVAS_WIDTH = 1000;

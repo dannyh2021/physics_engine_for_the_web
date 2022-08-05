@@ -2,10 +2,7 @@ import React from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three-orbitcontrols-ts";
 import { Matrix4, Vector3 } from "three";
-import { getAllContacts, resolveCollision, World } from "../physics_engine/physics_engine";
-import { Sphere } from "../physics_engine/Sphere";
-import { Box } from "../physics_engine/Box";
-import { Plane } from "../physics_engine/Plane";
+import { World, Sphere, Box, Plane } from "../physics_engine/physics_engine";
 
 const CANVAS_WIDTH = 1000;
 const CANVAS_HEIGHT = 500;
@@ -195,7 +192,7 @@ export default class Demo3 extends React.Component {
         return (
             <div className="demo2">
                 <h2>Demo 3</h2>
-                <p>This scene shows how the physics engine simulates constrained dynamics. The sphere, set with some initial velocity, is launched into a small pile of cubes, and all objects are accelerated by the force of gravity. The engine may be extended to become part of physics-based game, such as one involved ballistics.</p>
+                <p>This scene shows how the physics engine simulates constrained dynamics. The sphere, set with some initial velocity, is launched into a small pile of cubes, and all objects are accelerated by the force of gravity. The engine may be extended to become part of physics-based game, such as one involving ballistics.</p>
                 <button onClick={this.onRestart}>Restart</button>
                 <button onClick={this.onResume}>Resume</button>
                 <button onClick={this.onPause}>Pause</button>

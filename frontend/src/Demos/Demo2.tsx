@@ -1,10 +1,7 @@
 import React from "react";
-import { World, checkCollision, getAllContacts, resolveCollision } from "../physics_engine/physics_engine";
+import { World, Sphere, Box, Plane, checkCollision, getAllContacts, resolveCollision } from "../physics_engine/physics_engine";
 import * as THREE from "three";
 import { Matrix3, Scene, Vector3 } from "three";
-import { Sphere } from "../physics_engine/Sphere";
-import { Box } from "../physics_engine/Box";
-import { Plane } from "../physics_engine/Plane";
 import { OrbitControls } from "three-orbitcontrols-ts";
 import { yRotationMatrix3, zRotationMatrix3, convertMatrix3ToMatrix4, xRotationMatrix3, getQuaternionRotatingV1ToV2 } from "../physics_engine/math_library";
 

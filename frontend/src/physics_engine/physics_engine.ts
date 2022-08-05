@@ -4,9 +4,13 @@ import { Sphere } from "./Sphere";
 import { Box } from "./Box";
 import { Plane } from "./Plane";
 
+export { Sphere } from "./Sphere";
+export { Box } from "./Box";
+export { Plane } from "./Plane";
+
 export class World {
     public objects: any[];
-    public coefficient_of_restitution: number = 1; // 0 is fully inelastic, 1 is fully elastic
+    public coefficient_of_restitution: number = 0.8; // 0 is fully inelastic, 1 is fully elastic
     public dt: number = 1/60; // time step in seconds
 
     constructor() {
@@ -68,7 +72,7 @@ export class World {
         const contacts = getAllContacts(boundingBoxIntersections);
         
         for (let contact of contacts) {
-            resolveCollision(contact);
+            this.resolveCollision(contact);
         }
 
         for (let object of this.objects) {
@@ -99,6 +103,79 @@ export class World {
             }
 
             object.integrate(duration);
+        }
+    }
+
+    resolveCollision(contactData: any) {
+        const a = contactData.a;
+        const b = contactData.b;
+        const normal = contactData.contactNormal;
+        if (contactData.type === "vertex-face") {
+            console.log("resolving vertex-face contact");
+            const vertex = contactData.contactPoint;
+            const r_a = vertex.clone().sub(a.position);
+            const r_b = vertex.clone().sub(b.position);
+            const vertexVelocity_a = a.velocity.clone().add(a.getAngularVelocity().cross(r_a));
+            const vertexVelocity_b = b.velocity.clone().add(b.getAngularVelocity().cross(r_b));
+            const relativeVelocity = normal.dot(vertexVelocity_a.clone().sub(vertexVelocity_b));
+            if (relativeVelocity < 0) {
+                console.log("colliding contact");
+                
+                const I_inverse_a = a.getInertia().invert();
+                const I_inverse_b = b.getInertia().invert();
+    
+                const term1 = normal.dot(r_a.clone().cross(normal).applyMatrix3(I_inverse_a).cross(r_a));
+                const term2 = normal.dot(r_b.clone().cross(normal).applyMatrix3(I_inverse_b).cross(r_b));
+    
+                const j = -(1 + coefficient_of_restitution) * relativeVelocity / (a.inverseMass + b.inverseMass + term1 + term2);
+                console.log("relative Velocity: ", relativeVelocity);
+    
+                const impulse = normal.clone().multiplyScalar(j);
+                const impulse2 = normal.clone().multiplyScalar(-j);
+                a.applyImpulse(vertex, impulse);
+                b.applyImpulse(vertex, impulse2);
+            } else if (relativeVelocity === 0) {
+                console.log("resting contact");
+            } else {
+                // ignore
+                console.log("leaving");
+            }
+        } else if (contactData.type === "edge-edge") {
+            console.log("resolving edge-edge contact");
+            console.log("edge_a", contactData.edge_a);
+            console.log("edge_b", contactData.edge_b);
+            console.log("contactNormal: ", contactData.contactNormal);
+    
+            const vertex = getClosestPointBetweenTwoEdges(contactData.edge_a, contactData.edge_b);
+            const r_a = vertex.clone().sub(a.position);
+            const r_b = vertex.clone().sub(b.position);
+            const vertexVelocity_a = a.velocity.clone().add(a.getAngularVelocity().cross(r_a));
+            const vertexVelocity_b = b.velocity.clone().add(b.getAngularVelocity().cross(r_b));
+            const relativeVelocity = normal.dot(vertexVelocity_a.clone().sub(vertexVelocity_b));
+            if (relativeVelocity < 0) {
+                console.log("colliding contact");
+                
+                const I_inverse_a = a.getInertia().invert();
+                let I_inverse_b = b.getInertia().invert();
+    
+                const term1 = normal.dot(r_a.clone().cross(normal).applyMatrix3(I_inverse_a).cross(r_a));
+                const term2 = normal.dot(r_b.clone().cross(normal).applyMatrix3(I_inverse_b).cross(r_b));
+    
+                const j = -(1 + coefficient_of_restitution) * relativeVelocity / (a.inverseMass + b.inverseMass + term1 + term2);
+    
+                const impulse = normal.clone().multiplyScalar(j);
+                const impulse2 = normal.clone().multiplyScalar(-j);
+                a.applyImpulse(vertex, impulse);
+                b.applyImpulse(vertex, impulse2);
+            } else if (relativeVelocity === 0) {
+                console.log("resting contact");
+            } else {
+                // ignore
+                console.log("leaving");
+            }
+        } else {
+            console.error("contactData type not recognized.");
+            console.log("contact data: ", contactData);
         }
     }
 
@@ -260,8 +337,6 @@ export function getAllContacts(boundingBoxIntersections: any[]) {
 
     return contacts;
 }
-
-// todo: refactor functions below
 
 export function getContactData(a: any, b: any) {
     if (a instanceof Box && b instanceof Box) {
