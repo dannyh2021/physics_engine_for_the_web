@@ -1,7 +1,7 @@
 # physics_engine_for_the_web
 
 ## About the Project
-In order to challenge myself and improve my skills, I tried designing and implementing a simple rigid-body dynamics physics engine. This is probably the most difficult and time-consuming coding project I've pursued thus far, but I feel that it's been worthwhile. I gained insight into how physics engines worked, and it was also rewarding to apply concepts I've learned before (such vectors, matrices, and quaternions) towards a tangible product. You can view a visual demo on http://physics-engine.danny-huang.com/, where I set up a few scenes that simulate objects using the physics engine.
+In order to challenge myself and improve my skills, I tried designing and implementing a simple rigid-body dynamics physics engine. This is probably the most difficult and time-consuming coding project I've pursued thus far, but I feel that it's been worthwhile. I gained insight into how physics engines worked, and it was also rewarding to apply concepts I've learned before (such vectors, matrices, and quaternions) towards a tangible product. You can view a visual demo on https://physics-engine-fa69e.web.app/, where I set up a few scenes that simulate objects using the physics engine.
 
 ## Built with
 * Language: Typescript
